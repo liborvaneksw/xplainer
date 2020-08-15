@@ -21,7 +21,7 @@ therefore you can skip this if you do not need to see it.
 
 - Run following command with the path to the model you would like to explore:
 ```bash
-xplainer --model /path/to/your/model .
+xplainer --model /path/to/your/model
 ```
 
 Open the browser, type http://localhost:5005/ and you are ready to go!
@@ -88,4 +88,4 @@ It is a great way to start with explainable AI and discover a huge number of res
 
 ### Libraries Used
 - https://github.com/sicara/tf-explain
-- https://github.com/marcotcr/limet
+- https://github.com/marcotcr/lime
