@@ -1,0 +1,8 @@
+tensorflow
+flask
+flask-cors
+opencv-python
+tf-explain
+lime
+pydot # for tf.keras.utils.plot_model only
+graphviz # for tf.keras.utils.plot_model only

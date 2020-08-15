@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+from xplainer.backend.main import create_and_run_app
+
+create_and_run_app()

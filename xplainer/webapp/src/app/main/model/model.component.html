@@ -1,0 +1,17 @@
+<div class="left">
+  <mat-selection-list [multiple]="false">
+    <mat-list-option [routerLink]="'/model'">
+      Overview
+    </mat-list-option>
+    <mat-list-option [routerLink]="'/model/summary'">
+      Model Summary
+    </mat-list-option>
+    <mat-list-option [routerLink]="'/model/plot'">
+      Model Plot
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+
+<div class="model-page">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,37 @@
+<h1>Welcome to the World of Explainable AI!</h1>
+<p>
+  This toolkit will allow you to explore your model and the predictions it make.
+  At the moment, it focuses on <strong>Image Recognition</strong> and <strong>TensorFlow 2+</strong>.
+  However, it is very young and it should grow!
+</p>
+<br>
+
+<h1>Loaded Model</h1>
+<table *ngIf="modelInfo$ | async as modelInfo">
+  <tr>
+    <td class="first-column">Path:</td>
+    <td>{{ modelInfo["path"] }}</td>
+  </tr>
+  <tr>
+    <td class="first-column">Input Shape:</td>
+    <td>
+      <ng-container *ngFor="let s of modelInfo['input_shape']; let first=first;">
+        {{first ? "" : " x "}}
+        {{s}} </ng-container>
+    </td>
+  </tr>
+  <tr>
+    <td class="first-column">All Parameters:</td>
+    <td>{{ modelInfo["parameters"] | number}}</td>
+  </tr>
+  <tr>
+    <td class="first-column">Is Flat:
+      <app-info tooltip="If a model is flat, there is no nested model inside.
+      We can create a model which includes another model among its layers.
+      This is completely valid model in TensorFlow.
+      However, it might cause some function of our tool not to work.
+      For example tf-explain has a problem with this architecture."></app-info>
+    </td>
+    <td>{{ modelInfo["is_flat"] }}</td>
+  </tr>
+</table>

@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.image-container {
+  position: fixed;
+  overflow-y: auto;
+  top: 110px;
+  right: 0;
+  bottom: 0;
+  left: 320px;
+}

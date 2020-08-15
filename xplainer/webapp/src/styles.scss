@@ -1,0 +1,38 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 1.3em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+p {
+  max-width: 800px;
+}
+
+// https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html
+// https://medium.com/@treviergits/angular-material-theme-color-options-7d5968cb7460
+// https://www.materialpalette.com/
+// https://coolors.co/palettes/trending
+
+$light-primary: mat-palette($mat-grey, 200, 500, 300);
+$light-accent: mat-palette($mat-green, 200);
+$light-warn: mat-palette($mat-deep-orange, 200);
+
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+@include angular-material-theme($light-theme)
+

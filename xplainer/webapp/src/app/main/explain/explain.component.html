@@ -1,0 +1,56 @@
+<div class="left">
+  <h1>Image</h1>
+  <div class="image-box" [class.error]="uploadingState==UploadingState.error">
+    <mat-spinner color="accent" *ngIf="uploadingState==UploadingState.uploading"></mat-spinner>
+    <img *ngIf="uploadedImage" [src]="uploadedImage">
+    <button mat-raised-button
+            class="upload-button"
+            [class.hide]="uploadedImage"
+            (click)="openDialog()"
+            *ngIf="uploadingState!=UploadingState.uploading">
+      Click to select an image.
+    </button>
+    <input type="file" accept="image/*" style="display:none" (change)="imageSelected($event)" #fileInput>
+  </div>
+
+  <h1>Available Tools</h1>
+  <mat-accordion class="menu" *ngIf="(tools$ | async) as tools">
+    <mat-expansion-panel *ngFor="let category of categories$ | async" class="menu-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ category }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-selection-list class="selection-list" [multiple]="false" [disabled]="category == selectedCategory"
+                          (selectionChange)="selectionChanged($event)">
+        <mat-list-option class="option"
+                         *ngFor="let tool of tools[category]"
+                         [value]="tool['id']" [routerLink]="'/explain/'+tool['id']"
+                         [selected]="selectedItem == tool['id']">
+          {{ tool["name"] }}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div class="tool">
+  <ng-container *ngIf="uploadingState==UploadingState.ok">
+    <router-outlet></router-outlet>
+  </ng-container>
+
+  <ng-container *ngIf="uploadingState==UploadingState.uploading">
+    <mat-spinner color="accent" *ngIf="uploadingState==UploadingState.uploading"></mat-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="uploadingState==UploadingState.none">
+    <h1>No image</h1>
+    Please upload an image to be analysed.
+  </ng-container>
+
+  <ng-container *ngIf="uploadingState==UploadingState.error">
+    <h1>Upload error.</h1>
+    Unknown error occurred during the image upload.
+  </ng-container>
+</div>

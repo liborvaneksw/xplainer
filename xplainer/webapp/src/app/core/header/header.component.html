@@ -1,0 +1,14 @@
+<div class="left">
+  <div class="logo">
+    <h1 (click)="router.navigate(['/']);">xplainer.ai <sup>toolkit</sup></h1>
+  </div>
+  <div class="example-button-row">
+    <button mat-button (click)="router.navigate(['/model']);">Model</button>
+    <button mat-button (click)="router.navigate(['/explain']);">Explain</button>
+  </div>
+</div>
+<div class="right">
+  <button mat-icon-button (click)="router.navigate(['/about']);">
+    <mat-icon>help_outline</mat-icon>
+  </button>
+</div>

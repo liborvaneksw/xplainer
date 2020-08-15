@@ -1,0 +1,28 @@
+<ng-container *ngIf="toolDetail$ | async as details else unknownTool">
+  <h1>{{ details["name"] }}</h1>
+  <p> {{ details["description"] }} </p>
+  <p>Source: <a [href]="details['source_url']" target="_blank">{{details["source_name"]}}</a></p>
+
+  <h2>Output</h2>
+  <ng-container *ngIf="this.prediction$ | async as prediction else noPrediction">
+    Probabilities:
+    <ng-container *ngFor="let pred of prediction; let last = last">
+      {{pred | number:'.2-2'}} {{last ? "" : ","}}
+    </ng-container>
+  </ng-container>
+  <ng-template #noPrediction>Probabilities: loading ...</ng-template>
+
+  <h2>Explanation</h2>
+  <ng-container *ngIf="explained$ | async as explained else loadingExplanation">
+    <p>Class id: {{ explained["label_id"]}}</p>
+    <img [src]="sanitizer.bypassSecurityTrustResourceUrl(explained['image'])">
+  </ng-container>
+  <ng-template #loadingExplanation>
+    <mat-spinner color="accent"></mat-spinner>
+  </ng-template>
+
+</ng-container>
+
+<ng-template #unknownTool>
+  Unknown tool!
+</ng-template>
