@@ -1,0 +1,20 @@
+.explanation-form {
+  .results, .threshold {
+    margin: 0 10px 0 0;
+    width: 150px;
+  }
+}
+
+.image-card {
+  width: 224px;
+  margin: 0 20px 0 0;
+}
+
+.paginator {
+  margin: 15px 0 0 0;
+}
+
+.explanations {
+  display: flex;
+  flex-direction: row;
+}

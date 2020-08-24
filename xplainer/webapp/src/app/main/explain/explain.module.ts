@@ -8,6 +8,13 @@ import {MatListModule} from "@angular/material/list";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {ToolComponent} from "./tool/tool.component";
 import {OverviewComponent} from "./overview/overview.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
+import {MatCardModule} from "@angular/material/card";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {AppCommonModule} from "../../common/app-common.module";
 
 
 @NgModule({
@@ -16,14 +23,21 @@ import {OverviewComponent} from "./overview/overview.component";
     ToolComponent,
     OverviewComponent,
   ],
-    imports: [
-        CommonModule,
-        ExplainRoutingModule,
-        MatExpansionModule,
-        MatButtonModule,
-        MatListModule,
-        MatProgressSpinnerModule,
-    ]
+  imports: [
+    CommonModule,
+    ExplainRoutingModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatListModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule,
+    MatPaginatorModule,
+    AppCommonModule,
+  ]
 })
 export class ExplainModule {
 }

@@ -9,6 +9,7 @@ from flask import request, session, make_response
 from flask import send_file, send_from_directory, jsonify, Flask, Response
 
 from xplainer.backend.toolkit import ToolKit
+from xplainer.backend.tools.abstract_tool import GeneralSetup
 from xplainer.backend.utils.image import get_base64png, prepare_for_prediction, create_thumbnail
 from xplainer.backend.utils.model import get_params_count, get_input_shape, is_flat
 
@@ -57,14 +58,20 @@ def register_routes(app: Flask, tmp_dir: str, model: tf.keras.Model, frontend: b
 
         return jsonify(tool.to_json(detail=True))
 
-    @app.route("/api/tools/<string:name>/explain", methods=["GET"])
+    @app.route("/api/tools/<string:name>/explain", methods=["POST"])
     def tool_explain(name: str):
         tool = toolbox.get_tool(name)
+        general_setup = request.json["general_setup"]
         if tool is None:
             return make_response(jsonify({"error": f"Invalid tool id '{name}'."}), 404)
 
+        try:
+            general_setup = GeneralSetup(general_setup)
+        except (KeyError, ValueError) as e:
+            return make_response(jsonify({"error": f"General setup is invalid."}), 400)
+
         image_path = os.path.join(tmp_dir, session["image_id"] + ".png")
-        result = tool.explain(model, image_path)
+        result = tool.explain(model, image_path, general_setup)
         return json.dumps(result)
 
     @app.route("/api/image", methods=["PUT"])
