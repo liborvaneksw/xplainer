@@ -1,4 +1,4 @@
-export interface GeneralSetup {
+export interface GeneralSettings {
   results: number;
   threshold: number;
 }

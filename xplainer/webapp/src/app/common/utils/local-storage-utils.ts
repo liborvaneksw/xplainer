@@ -1,11 +1,29 @@
 /**
- * Returns the current string value associated with the given in localStorage
- * or the default_value if the key does not exists.
+ * Returns the current JSON value associated with the given in localStorage
+ * or the defaultValue if the key does not exists.
  */
-export function getLocalStorageString(key: string, default_value: string): string {
+export function getLocalStorageJson(key: string, defaultValue: any): any {
   const value = localStorage.getItem(key);
   if (!value) {
-    return default_value;
+    return defaultValue;
+  }
+
+  const jsonValue = JSON.parse(value);
+  if (!jsonValue) {
+    return defaultValue;
+  }
+
+  return jsonValue;
+}
+
+/**
+ * Returns the current string value associated with the given in localStorage
+ * or the defaultValue if the key does not exists.
+ */
+export function getLocalStorageString(key: string, defaultValue: string): string {
+  const value = localStorage.getItem(key);
+  if (!value) {
+    return defaultValue;
   }
 
   return value;
@@ -13,17 +31,17 @@ export function getLocalStorageString(key: string, default_value: string): strin
 
 /**
  * Returns the current integer value associated with the given in localStorage
- * or the default_value if the key does not exists.
+ * or the defaultValue if the key does not exists.
  */
-export function getLocalStorageInteger(key: string, default_value: number): number {
+export function getLocalStorageInteger(key: string, defaultValue: number): number {
   const value = localStorage.getItem(key);
   if (!value) {
-    return default_value;
+    return defaultValue;
   }
 
   const intValue = parseInt(value);
   if (Number.isNaN(intValue)) {
-    return default_value;
+    return defaultValue;
   }
 
   return intValue;
@@ -31,17 +49,17 @@ export function getLocalStorageInteger(key: string, default_value: number): numb
 
 /**
  * Returns the current float value associated with the given in localStorage
- * or the default_value if the key does not exists.
+ * or the defaultValue if the key does not exists.
  */
-export function getLocalStorageFloat(key: string, default_value: number): number {
+export function getLocalStorageFloat(key: string, defaultValue: number): number {
   const value = localStorage.getItem(key);
   if (!value) {
-    return default_value;
+    return defaultValue;
   }
 
   const floatValue = parseFloat(value);
   if (Number.isNaN(floatValue)) {
-    return default_value;
+    return defaultValue;
   }
 
   return floatValue;
@@ -49,12 +67,12 @@ export function getLocalStorageFloat(key: string, default_value: number): number
 
 /**
  * Returns the current float value associated with the given in localStorage
- * or the default_value if the key does not exists.
+ * or the defaultValue if the key does not exists.
  */
-export function getLocalStorageBoolean(key: string, default_value: boolean): boolean {
+export function getLocalStorageBoolean(key: string, defaultValue: boolean): boolean {
   const value = localStorage.getItem(key);
   if (!value) {
-    return default_value;
+    return defaultValue;
   }
   return value && value.toLocaleLowerCase() === "true";
 }

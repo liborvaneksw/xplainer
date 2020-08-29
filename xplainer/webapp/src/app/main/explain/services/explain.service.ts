@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Location} from '@angular/common';
 import {environment} from "../../../../environments/environment";
-import {GeneralSetup} from "../models/tool-setup";
+import {GeneralSettings} from "../models/tool-setup";
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +42,10 @@ export class ExplainService {
     return this.http.get(Location.joinWithSlash(environment.apiUrl, "image/thumbnail"));
   }
 
-  explain(tool_id: string, generalSetup: GeneralSetup) {
+  explain(tool_id: string, generalSettings: GeneralSettings, toolSettings: any) {
     return this.http.post(Location.joinWithSlash(environment.apiUrl, "tools/" + tool_id + "/explain"), {
-      general_setup: generalSetup
+      general_settings: generalSettings,
+      tool_settings: toolSettings,
     });
   }
 

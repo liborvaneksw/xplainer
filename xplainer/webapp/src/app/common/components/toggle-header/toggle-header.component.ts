@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {getLocalStorageBoolean} from "../../utils/local-storage-utils";
 
@@ -30,6 +30,8 @@ export class ToggleHeaderComponent implements OnChanges {
 
   @Input() open: boolean = false;
 
+  @Output() openChange = new EventEmitter<boolean>();
+
   @Input() storageKey: string = undefined;
 
   onToggle() {
@@ -37,11 +39,13 @@ export class ToggleHeaderComponent implements OnChanges {
     if (this.storageKey) {
       localStorage.setItem(this.storageKey, String(this.open));
     }
+    this.openChange.emit(this.open);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.storageKey) {
       this.open = getLocalStorageBoolean(this.storageKey, this.open);
+      this.openChange.emit(this.open);
     }
   }
 }

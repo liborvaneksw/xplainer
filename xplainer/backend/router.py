@@ -9,7 +9,8 @@ from flask import request, session, make_response
 from flask import send_file, send_from_directory, jsonify, Flask, Response
 
 from xplainer.backend.toolkit import ToolKit
-from xplainer.backend.tools.abstract_tool import GeneralSetup
+from xplainer.backend.tools import AbstractTool
+from xplainer.backend.tools.abstract_tool import GeneralSettings
 from xplainer.backend.utils.image import get_base64png, prepare_for_prediction, create_thumbnail
 from xplainer.backend.utils.model import get_params_count, get_input_shape, is_flat
 
@@ -61,17 +62,23 @@ def register_routes(app: Flask, tmp_dir: str, model: tf.keras.Model, frontend: b
     @app.route("/api/tools/<string:name>/explain", methods=["POST"])
     def tool_explain(name: str):
         tool = toolbox.get_tool(name)
-        general_setup = request.json["general_setup"]
+        general_settings = request.json["general_settings"]
+        tool_settings = request.json.get("tool_settings", None)
         if tool is None:
             return make_response(jsonify({"error": f"Invalid tool id '{name}'."}), 404)
 
         try:
-            general_setup = GeneralSetup(general_setup)
+            general_settings = GeneralSettings(general_settings)
         except (KeyError, ValueError) as e:
-            return make_response(jsonify({"error": f"General setup is invalid."}), 400)
+            return make_response(jsonify({"error": f"General setup is invalid. {e}"}), 400)
+
+        try:
+            tool_settings = tool.process_parameters(tool_settings)
+        except ValueError as e:
+            return make_response(jsonify({"error": f"General setup is invalid. {e}"}), 400)
 
         image_path = os.path.join(tmp_dir, session["image_id"] + ".png")
-        result = tool.explain(model, image_path, general_setup)
+        result = tool.explain(model, image_path, general_settings, tool_settings)
         return json.dumps(result)
 
     @app.route("/api/image", methods=["PUT"])

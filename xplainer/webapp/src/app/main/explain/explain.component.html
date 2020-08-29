@@ -22,7 +22,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <mat-selection-list class="selection-list" [multiple]="false" [disabled]="category == selectedCategory"
+      <mat-selection-list class="selection-list" [multiple]="false"
                           (selectionChange)="selectionChanged($event)">
         <mat-list-option class="option"
                          *ngFor="let tool of tools[category]"

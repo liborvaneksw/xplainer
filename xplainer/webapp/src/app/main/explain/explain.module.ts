@@ -15,6 +15,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {AppCommonModule} from "../../common/app-common.module";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {AppCommonModule} from "../../common/app-common.module";
     MatCardModule,
     MatPaginatorModule,
     AppCommonModule,
+    MatCheckboxModule,
   ]
 })
 export class ExplainModule {

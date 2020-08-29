@@ -12,3 +12,18 @@ class IntegratedGradients(AbstractTfExplainBasicTool):
 
     def category(self):
         return "Gradient Based"
+
+    def tool_parameters(self) -> dict:
+        return {
+            "list": [
+                {
+                    "param": "n_steps",
+                    "name": "Steps",
+                    "type": "int",
+                    "default": 20,
+                    "min": 1,
+                    "max": 1000,
+                    "step": 1,
+                }
+            ]
+        }

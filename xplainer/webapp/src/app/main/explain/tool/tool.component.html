@@ -6,8 +6,8 @@
   <app-toggle-header titleText="General Setup"
                      tooltip="Applied across all tools"
                      [open]="true"
-                     [storageKey]="STORAGE_KEY+'generalSetup'">
-    <form [formGroup]="generalSettingsForm" class="explanation-form">
+                     [storageKey]="STORAGE_KEY+'generalSetting'">
+    <form [formGroup]="generalSettingsForm" class="general-settings-form">
       <mat-form-field appearance="fill" class="results">
         <mat-label>Process Images (max)</mat-label>
         <input matInput type="number" formControlName="results">
@@ -19,6 +19,34 @@
       </mat-form-field>
 
       <button mat-raised-button (click)="generalSettingsChanged()">Update</button>
+    </form>
+  </app-toggle-header>
+
+  <app-toggle-header titleText="Tool Setup"
+                     *ngIf="toolParams"
+                     [open]="true"
+                     [storageKey]="STORAGE_KEY+'toolSettings'">
+    <form [formGroup]="toolSettingsForm" class="tool-settings-form">
+      <div *ngFor="let row of toolParamsRows; let last = last;">
+        <ng-container *ngFor="let paramKey of row">
+          <ng-container *ngIf="toolParams[paramKey] as param">
+            <mat-form-field *ngIf="param['type'] == 'int' || param['type'] == 'float'"
+                            appearance="fill"
+                            class="toolSettingsField">
+              <mat-label>{{ param["name"] }}</mat-label>
+              <input matInput type="number" [step]="param['step']" [formControlName]="param['param']">
+            </mat-form-field>
+
+            <mat-checkbox *ngIf="param['type'] == 'bool'"
+                          [formControlName]="param['param']"
+                          class="toolSettingsField">
+              {{ param["name"] }}
+            </mat-checkbox>
+          </ng-container>
+        </ng-container>
+        <button *ngIf="last" mat-raised-button (click)="toolSettingsChanged()">Update</button>
+      </div>
+
     </form>
   </app-toggle-header>
 
@@ -47,13 +75,17 @@
     <mat-spinner color="accent"></mat-spinner>
   </ng-template>
 
-  <app-toggle-header [titleText]="'All probabilities'" [storageKey]="STORAGE_KEY+'allProbabilities'">
-    <ng-container *ngIf="this.prediction$ | async as prediction else noPrediction">
+  <app-toggle-header [titleText]="'All probabilities'"
+                     [storageKey]="STORAGE_KEY+'allProbabilities'"
+                     (openChange)="allProbabilitiesOpen($event)">
+    <ng-container *ngIf="this.prediction$ && (this.prediction$ | async) as prediction else noPrediction">
       <ng-container *ngFor="let pred of prediction; let last = last">
         {{pred | number:'.2-2'}} {{last ? "" : ","}}
       </ng-container>
     </ng-container>
-    <ng-template #noPrediction>Probabilities: loading ...</ng-template>
+    <ng-template #noPrediction>
+      <mat-spinner color="accent"></mat-spinner>
+    </ng-template>
   </app-toggle-header>
 
 </ng-container>
