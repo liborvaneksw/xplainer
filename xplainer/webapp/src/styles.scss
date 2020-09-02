@@ -4,6 +4,7 @@
 
 html, body {
   height: 100%;
+  background-color: #f4f4f4;
 }
 
 body {
@@ -23,13 +24,17 @@ p {
   max-width: 800px;
 }
 
+.mat-form-field-flex {
+  background-color: white !important;
+}
+
 // https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html
 // https://medium.com/@treviergits/angular-material-theme-color-options-7d5968cb7460
 // https://www.materialpalette.com/
 // https://coolors.co/palettes/trending
 
-$light-primary: mat-palette($mat-grey, 200, 500, 300);
-$light-accent: mat-palette($mat-green, 200);
+$light-primary: mat-palette($mat-green, 900);
+$light-accent: mat-palette($mat-green, 200, 500, 300);
 $light-warn: mat-palette($mat-deep-orange, 200);
 
 $light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);

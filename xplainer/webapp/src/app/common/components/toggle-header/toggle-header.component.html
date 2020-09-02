@@ -1,0 +1,14 @@
+<h2 (click)="onToggle()">
+  <span class="title">{{ titleText }}</span>
+  <app-info [tooltip]="tooltip" *ngIf="tooltip"></app-info>
+  <button
+    mat-icon-button
+    class="icon-button"
+    color="primary">
+    <mat-icon *ngIf="!open">keyboard_arrow_down</mat-icon>
+    <mat-icon *ngIf="open">keyboard_arrow_up</mat-icon>
+  </button>
+</h2>
+<div [@togglePanel]="open ? 'open' : 'closed'" [style.display]="open ? 'block' : 'none'">
+  <ng-content></ng-content>
+</div>

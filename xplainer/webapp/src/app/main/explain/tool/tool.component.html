@@ -3,23 +3,90 @@
   <p> {{ details["description"] }} </p>
   <p>Source: <a [href]="details['source_url']" target="_blank">{{details["source_name"]}}</a></p>
 
-  <h2>Output</h2>
-  <ng-container *ngIf="this.prediction$ | async as prediction else noPrediction">
-    Probabilities:
-    <ng-container *ngFor="let pred of prediction; let last = last">
-      {{pred | number:'.2-2'}} {{last ? "" : ","}}
-    </ng-container>
-  </ng-container>
-  <ng-template #noPrediction>Probabilities: loading ...</ng-template>
+  <app-toggle-header titleText="General Setup"
+                     tooltip="Applied across all tools"
+                     [open]="true"
+                     [storageKey]="STORAGE_KEY+'generalSetting'">
+    <form [formGroup]="generalSettingsForm" class="general-settings-form">
+      <mat-form-field appearance="fill" class="results">
+        <mat-label>Process Images (max)</mat-label>
+        <input matInput type="number" formControlName="results">
+      </mat-form-field>
 
-  <h2>Explanation</h2>
-  <ng-container *ngIf="explained$ | async as explained else loadingExplanation">
-    <p>Class id: {{ explained["label_id"]}}</p>
-    <img [src]="sanitizer.bypassSecurityTrustResourceUrl(explained['image'])">
+      <mat-form-field appearance="fill" class="threshold">
+        <mat-label>Using threshold (min)</mat-label>
+        <input matInput type="number" step="0.1" formControlName="threshold">
+      </mat-form-field>
+
+      <button mat-raised-button (click)="generalSettingsChanged()">Update</button>
+    </form>
+  </app-toggle-header>
+
+  <app-toggle-header titleText="Tool Setup"
+                     *ngIf="toolParams"
+                     [open]="true"
+                     [storageKey]="STORAGE_KEY+'toolSettings'">
+    <form [formGroup]="toolSettingsForm" class="tool-settings-form">
+      <div *ngFor="let row of toolParamsRows; let last = last;">
+        <ng-container *ngFor="let paramKey of row">
+          <ng-container *ngIf="toolParams[paramKey] as param">
+            <mat-form-field *ngIf="param['type'] == 'int' || param['type'] == 'float'"
+                            appearance="fill"
+                            class="toolSettingsField">
+              <mat-label>{{ param["name"] }}</mat-label>
+              <input matInput type="number" [step]="param['step']" [formControlName]="param['param']">
+            </mat-form-field>
+
+            <mat-checkbox *ngIf="param['type'] == 'bool'"
+                          [formControlName]="param['param']"
+                          class="toolSettingsField">
+              {{ param["name"] }}
+            </mat-checkbox>
+          </ng-container>
+        </ng-container>
+        <button *ngIf="last" mat-raised-button (click)="toolSettingsChanged()">Update</button>
+      </div>
+
+    </form>
+  </app-toggle-header>
+
+  <ng-container *ngIf="false">
+    <h2>Tool Specific Setup</h2>
   </ng-container>
+
+  <h2>Explanations</h2>
+
+  <div class="explanations" *ngIf="explained$ | async as explainedList else loadingExplanation">
+    <mat-card class="image-card" *ngFor="let explained of explainedList">
+      <mat-card-header>
+        <mat-card-title>Class id: {{ explained["label_id"]}}</mat-card-title>
+        <mat-card-subtitle>Probability: {{ explained["probability"] | number:'.2-2'}}</mat-card-subtitle>
+      </mat-card-header>
+      <img [src]="sanitizer.bypassSecurityTrustResourceUrl(explained['image'])" width="224" height="224">
+    </mat-card>
+    <mat-paginator *ngIf="false"
+                   class="paginator"
+                   [length]="100"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
   <ng-template #loadingExplanation>
     <mat-spinner color="accent"></mat-spinner>
   </ng-template>
+
+  <app-toggle-header [titleText]="'All probabilities'"
+                     [storageKey]="STORAGE_KEY+'allProbabilities'"
+                     (openChange)="allProbabilitiesOpen($event)">
+    <ng-container *ngIf="this.prediction$ && (this.prediction$ | async) as prediction else noPrediction">
+      <ng-container *ngFor="let pred of prediction; let last = last">
+        {{pred | number:'.2-2'}} {{last ? "" : ","}}
+      </ng-container>
+    </ng-container>
+    <ng-template #noPrediction>
+      <mat-spinner color="accent"></mat-spinner>
+    </ng-template>
+  </app-toggle-header>
 
 </ng-container>
 

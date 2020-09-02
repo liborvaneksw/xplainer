@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Location} from '@angular/common';
 import {environment} from "../../../../environments/environment";
+import {GeneralSettings} from "../models/tool-setup";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class ExplainService {
     });
   }
 
-  getTool(id) {
-    return this.http.get(Location.joinWithSlash(environment.apiUrl, "tools/" + id));
+  getTool(tool_id: string) {
+    return this.http.get(Location.joinWithSlash(environment.apiUrl, "tools/" + tool_id));
   }
 
   uploadImage(name, file) {
@@ -37,12 +38,15 @@ export class ExplainService {
     return this.http.put(Location.joinWithSlash(environment.apiUrl, "image"), params);
   }
 
-   getThumbnail(tool_id) {
+  getThumbnail() {
     return this.http.get(Location.joinWithSlash(environment.apiUrl, "image/thumbnail"));
   }
 
-  explain(tool_id) {
-    return this.http.get(Location.joinWithSlash(environment.apiUrl, "tools/" + tool_id + "/explain"));
+  explain(tool_id: string, generalSettings: GeneralSettings, toolSettings: any) {
+    return this.http.post(Location.joinWithSlash(environment.apiUrl, "tools/" + tool_id + "/explain"), {
+      general_settings: generalSettings,
+      tool_settings: toolSettings,
+    });
   }
 
   predict() {
