@@ -8,7 +8,7 @@ class IntegratedGradients(AbstractTfExplainBasicTool):
         super().__init__(tf_explain_IntegratedGradients)
 
     def name(self):
-        return "IntegratedGradients"
+        return "Integrated Gradients"
 
     def category(self):
         return "Gradient Based"

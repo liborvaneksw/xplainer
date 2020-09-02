@@ -8,7 +8,7 @@ class GradientsInputs(AbstractTfExplainBasicTool):
         super().__init__(tf_explain_GradientsInputs)
 
     def name(self):
-        return "GradientsInputs"
+        return "Gradients Inputs"
 
     def category(self):
         return "Gradient Based"
