@@ -20,7 +20,7 @@ For more information, please visit the [GitHub repository](https://github.com/li
 
 setuptools.setup(
     name="xplainer",
-    version="0.0.1",
+    version="0.0.2",
     author="Libor Vanek",
     author_email="libor@xplainer.ai",
     description="xplainer.ai toolkit enables developers to explore predictions "
