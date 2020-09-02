@@ -1,4 +1,4 @@
-# xplainer toolkit 0.0.1
+# xplainer toolkit 0.0.2
 The ultimate goal of this toolkit is to promote explainable AI. 
 It should offer developers varied ways to examine predictions of their models.
 
