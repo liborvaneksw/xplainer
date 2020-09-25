@@ -33,7 +33,7 @@ markdown==3.2.2           # via tensorboard
 markupsafe==1.1.1         # via jinja2
 matplotlib==3.3.0         # via lime, scikit-image
 networkx==2.4             # via scikit-image
-numpy==1.19.0             # via h5py, imageio, keras-preprocessing, lime, matplotlib, opencv-python, opt-einsum, pywavelets, scikit-image, scikit-learn, scipy, tensorboard, tensorflow, tifffile
+numpy==1.18.5             # via h5py, imageio, keras-preprocessing, lime, matplotlib, opencv-python, opt-einsum, pywavelets, scikit-image, scikit-learn, scipy, tensorboard, tensorflow, tifffile
 oauthlib==3.1.0           # via requests-oauthlib
 opencv-python==4.3.0.36   # via -r requirements.in, tf-explain
 opt-einsum==3.2.1         # via tensorflow
@@ -50,12 +50,12 @@ requests==2.24.0          # via requests-oauthlib, tensorboard
 rsa==4.6                  # via google-auth
 scikit-image==0.17.2      # via lime
 scikit-learn==0.23.2      # via lime
-scipy==1.4.1              # via lime, scikit-image, scikit-learn, tensorflow
+scipy==1.4.1              # via lime, scikit-image, scikit-learn
 six==1.15.0               # via absl-py, astunparse, cycler, flask-cors, google-auth, google-pasta, grpcio, h5py, keras-preprocessing, protobuf, python-dateutil, tensorboard, tensorflow
 tensorboard-plugin-wit==1.7.0  # via tensorboard
 tensorboard==2.2.2        # via tensorflow
 tensorflow-estimator==2.2.0  # via tensorflow
-tensorflow==2.2.0         # via -r requirements.in
+tensorflow==2.2.1         # via -r requirements.in
 termcolor==1.1.0          # via tensorflow
 tf-explain==0.2.1         # via -r requirements.in
 threadpoolctl==2.1.0      # via scikit-learn
