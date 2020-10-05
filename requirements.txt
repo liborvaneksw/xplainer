@@ -4,41 +4,45 @@
 #
 #    pip-compile requirements.in
 #
-absl-py==0.9.0            # via tensorboard, tensorflow
+absl-py==0.10.0           # via tensorboard, tensorflow
+aiohttp==3.6.2            # via google-auth
 astunparse==1.6.3         # via tensorflow
+async-timeout==3.0.1      # via aiohttp
+attrs==20.2.0             # via aiohttp
 cachetools==4.1.1         # via google-auth
-certifi==2020.6.20        # via requests
-chardet==3.0.4            # via requests
+certifi==2020.6.20        # via matplotlib, requests
+chardet==3.0.4            # via aiohttp, requests
 click==7.1.2              # via flask
 cycler==0.10.0            # via matplotlib
 decorator==4.4.2          # via networkx
-flask-cors==3.0.8         # via -r requirements.in
+flask-cors==3.0.9         # via -r requirements.in
 flask==1.1.2              # via -r requirements.in, flask-cors
 gast==0.3.3               # via tensorflow
 google-auth-oauthlib==0.4.1  # via tensorboard
-google-auth==1.19.2       # via google-auth-oauthlib, tensorboard
+google-auth==1.22.0       # via google-auth-oauthlib, tensorboard
 google-pasta==0.2.0       # via tensorflow
 graphviz==0.14.1          # via -r requirements.in
-grpcio==1.30.0            # via tensorboard, tensorflow
+grpcio==1.32.0            # via tensorboard, tensorflow
 h5py==2.10.0              # via tensorflow
-idna==2.10                # via requests
+idna==2.10                # via requests, yarl
 imageio==2.9.0            # via scikit-image
 itsdangerous==1.1.0       # via flask
 jinja2==2.11.2            # via flask
-joblib==0.16.0            # via scikit-learn
+joblib==0.17.0            # via scikit-learn
 keras-preprocessing==1.1.2  # via tensorflow
 kiwisolver==1.2.0         # via matplotlib
 lime==0.2.0.1             # via -r requirements.in
 markdown==3.2.2           # via tensorboard
 markupsafe==1.1.1         # via jinja2
-matplotlib==3.3.0         # via lime, scikit-image
-networkx==2.4             # via scikit-image
-numpy==1.19.0             # via h5py, imageio, keras-preprocessing, lime, matplotlib, opencv-python, opt-einsum, pywavelets, scikit-image, scikit-learn, scipy, tensorboard, tensorflow, tifffile
+matplotlib==3.3.2         # via lime, scikit-image
+multidict==4.7.6          # via aiohttp, yarl
+networkx==2.5             # via scikit-image
+numpy==1.18.5             # via h5py, imageio, keras-preprocessing, lime, matplotlib, opencv-python, opt-einsum, pywavelets, scikit-image, scikit-learn, scipy, tensorboard, tensorflow, tifffile
 oauthlib==3.1.0           # via requests-oauthlib
-opencv-python==4.3.0.36   # via -r requirements.in, tf-explain
-opt-einsum==3.2.1         # via tensorflow
+opencv-python==4.4.0.44   # via -r requirements.in, tf-explain
+opt-einsum==3.3.0         # via tensorflow
 pillow==7.2.0             # via imageio, matplotlib, scikit-image
-protobuf==3.12.2          # via tensorboard, tensorflow
+protobuf==3.13.0          # via tensorboard, tensorflow
 pyasn1-modules==0.2.8     # via google-auth
 pyasn1==0.4.8             # via pyasn1-modules, rsa
 pydot==1.4.1              # via -r requirements.in
@@ -50,21 +54,22 @@ requests==2.24.0          # via requests-oauthlib, tensorboard
 rsa==4.6                  # via google-auth
 scikit-image==0.17.2      # via lime
 scikit-learn==0.23.2      # via lime
-scipy==1.4.1              # via lime, scikit-image, scikit-learn, tensorflow
+scipy==1.5.2              # via lime, scikit-image, scikit-learn
 six==1.15.0               # via absl-py, astunparse, cycler, flask-cors, google-auth, google-pasta, grpcio, h5py, keras-preprocessing, protobuf, python-dateutil, tensorboard, tensorflow
 tensorboard-plugin-wit==1.7.0  # via tensorboard
-tensorboard==2.2.2        # via tensorflow
-tensorflow-estimator==2.2.0  # via tensorflow
-tensorflow==2.2.0         # via -r requirements.in
+tensorboard==2.3.0        # via tensorflow
+tensorflow-estimator==2.3.0  # via tensorflow
+tensorflow==2.3.1         # via -r requirements.in
 termcolor==1.1.0          # via tensorflow
 tf-explain==0.2.1         # via -r requirements.in
 threadpoolctl==2.1.0      # via scikit-learn
-tifffile==2020.7.24       # via scikit-image
-tqdm==4.48.2              # via lime
-urllib3==1.25.9           # via requests
+tifffile==2020.10.1       # via scikit-image
+tqdm==4.50.0              # via lime
+urllib3==1.25.10          # via requests
 werkzeug==1.0.1           # via flask, tensorboard
-wheel==0.34.2             # via astunparse, tensorboard, tensorflow
+wheel==0.35.1             # via astunparse, tensorboard, tensorflow
 wrapt==1.12.1             # via tensorflow
+yarl==1.6.0               # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
